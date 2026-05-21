@@ -29,3 +29,31 @@ O projeto é um dashboard Streamlit de ações brasileiras (PETR4, ITUB4, VALE3)
 - **`app.py`** — orquestra tudo: carrega dados, monta métricas no topo, exibe os três gráficos em abas (Preco / Retorno Acumulado / Volume) e uma tabela de resumo no final.
 
 Para adicionar um novo gráfico: crie a função em `charts.py`, importe em `app.py` e chame com `st.plotly_chart(...)`.
+
+## Repositório GitHub
+
+Repositório: https://github.com/BrunoFeitosa5/dashboard-acoes  
+Branch principal: `main`
+
+### Sincronização automática
+
+Toda alteração feita via Claude Code (Write, Edit) é automaticamente enviada ao GitHub via hook `PostToolUse` configurado em `.claude/settings.local.json`. O hook executa:
+
+```powershell
+git add -A
+git commit -m "Auto-sync: <timestamp>"
+git push
+```
+
+O commit só é criado se houver alterações staged. A sincronização roda em background sem bloquear o trabalho.
+
+### Push manual
+
+Para enviar alterações manualmente fora do Claude Code:
+
+```powershell
+cd C:\Users\Bruno\Documents\ProjetoDoClaudeCode
+git add -A
+git commit -m "mensagem"
+git push
+```
