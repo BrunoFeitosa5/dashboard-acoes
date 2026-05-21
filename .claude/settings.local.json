@@ -8,7 +8,29 @@
       "Bash(pkill -f \"streamlit run\")",
       "Bash(fuser -k 8501/tcp)",
       "Bash(taskkill //F //PID 10652)",
-      "Bash(git config *)"
+      "Bash(git config *)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git push *)",
+      "Bash(git status *)",
+      "Bash(git diff *)"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit|NotebookEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "powershell",
+            "command": "Set-Location 'C:\\Users\\Bruno\\Documents\\ProjetoDoClaudeCode'; git add -A; git diff --cached --quiet; if ($LASTEXITCODE -ne 0) { git commit -m ('Auto-sync: ' + (Get-Date -Format 'yyyy-MM-dd HH:mm')); git push } 2>$null",
+            "timeout": 30,
+            "statusMessage": "Sincronizando com GitHub...",
+            "async": true
+          }
+        ]
+      }
     ]
   }
 }
